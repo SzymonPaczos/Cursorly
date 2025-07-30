@@ -12,6 +12,7 @@
 		A1234567890123456789012E /* ConnectionAutoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012F /* ConnectionAutoView.swift */; };
 		A1234567890123456789013A /* ConnectionManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789013B /* ConnectionManualView.swift */; };
 		A1234567890123456789013C /* ConnectionPremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789013D /* ConnectionPremiumView.swift */; };
+		A1234567890123456789013G /* MacWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789013H /* MacWelcomeView.swift */; };
 		A1234567890123456789013E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789013F /* Assets.xcassets */; };
 		A1234567890123456789014A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789014B /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -23,6 +24,7 @@
 		A1234567890123456789012F /* ConnectionAutoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionAutoView.swift; sourceTree = "<group>"; };
 		A1234567890123456789013B /* ConnectionManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManualView.swift; sourceTree = "<group>"; };
 		A1234567890123456789013D /* ConnectionPremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionPremiumView.swift; sourceTree = "<group>"; };
+		A1234567890123456789013H /* MacWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacWelcomeView.swift; sourceTree = "<group>"; };
 		A1234567890123456789013F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1234567890123456789014B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,6 +58,7 @@
 				A1234567890123456789012F /* ConnectionAutoView.swift */,
 				A1234567890123456789013B /* ConnectionManualView.swift */,
 				A1234567890123456789013D /* ConnectionPremiumView.swift */,
+				A1234567890123456789013H /* MacWelcomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				A1234567890123456789012E /* ConnectionAutoView.swift in Sources */,
 				A1234567890123456789013A /* ConnectionManualView.swift in Sources */,
 				A1234567890123456789013C /* ConnectionPremiumView.swift in Sources */,
+				A1234567890123456789013G /* MacWelcomeView.swift in Sources */,
 				A1234567890123456789012A /* CursorlyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +313,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 			};
 			name = Debug;
 		};
@@ -337,6 +342,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 			};
 			name = Release;
 		};

@@ -1,16 +1,21 @@
-# Cursorly - iOS App
+# Cursorly - Cross-Platform App
 
-Aplikacja iOS w SwiftUI, która pozwala zamienić iPhone'a w bezprzewodową myszkę dla komputera Mac.
+Aplikacja w SwiftUI, która pozwala zamienić iPhone'a w bezprzewodową myszkę dla komputera Mac. Dostępna na iOS i macOS.
 
 ## 📱 Funkcjonalności (Wersja 1.0 - UI Only)
 
-### Ekran startowy (WelcomeView)
+### Ekran startowy iOS (WelcomeView)
 - Tytuł: "Cursorly – połącz z komputerem"
 - Opis: "Zamień iPhone'a w bezprzewodową myszkę"
 - Trzy przyciski wyboru sposobu połączenia:
   - 🔵 Połącz automatycznie (Bluetooth/Wi-Fi)
   - 🌐 Połącz przez IP ręcznie
   - 🚀 Połącz przez Internet (premium)
+
+### Ekran startowy macOS (MacWelcomeView)
+- Tytuł: "Cursorly – aplikacja desktopowa"
+- Opis: "Wersja macOS - w budowie"
+- Placeholder dla przyszłych funkcjonalności
 
 ### Nawigacja
 - Używa `NavigationStack` (iOS 16+)
@@ -28,9 +33,10 @@ Aplikacja iOS w SwiftUI, która pozwala zamienić iPhone'a w bezprzewodową mysz
 
 ```
 Cursorly/
-├── CursorlyApp.swift              # Punkt wejścia aplikacji
+├── CursorlyApp.swift              # Punkt wejścia aplikacji (wykrywa platformę)
 ├── Views/
-│   ├── WelcomeView.swift          # Główny ekran powitalny
+│   ├── WelcomeView.swift          # Główny ekran powitalny iOS
+│   ├── MacWelcomeView.swift       # Główny ekran powitalny macOS
 │   ├── ConnectionAutoView.swift   # Tryb automatyczny
 │   ├── ConnectionManualView.swift # Tryb ręczny (IP)
 │   └── ConnectionPremiumView.swift # Tryb premium
@@ -40,12 +46,18 @@ Cursorly/
 
 ## 🚀 Instrukcje uruchomienia
 
+### iOS
 1. Otwórz projekt w Xcode 15.0+
-2. Wybierz symulator iPhone lub podłącz fizyczne urządzenie
+2. Wybierz symulator iPhone lub podłącz fizyczne urządzenie iOS
+3. Naciśnij Cmd+R aby uruchomić aplikację
+
+### macOS
+1. Otwórz projekt w Xcode 15.0+
+2. Zmień target na macOS
 3. Naciśnij Cmd+R aby uruchomić aplikację
 
 ## 📋 Wymagania
-- iOS 16.0+
+- iOS 16.0+ / macOS 13.0+
 - Xcode 15.0+
 - Swift 5.9+
 
