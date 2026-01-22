@@ -4,6 +4,7 @@ struct ConnectionAutoView: View {
     @EnvironmentObject var connectivityManager: ConnectivityManager
     @State private var showingPINAlert = false
     @State private var showingSettings = false
+    @State private var showingScanner = false
     @State private var selectedPeer: MCPeerID?
     @State private var pinCode = ""
     
@@ -18,10 +19,23 @@ struct ConnectionAutoView: View {
             } else {
                 // Widok wyszukiwania
                 VStack(spacing: 20) {
-                    Image(systemName: "antenna.radiowaves.left.and.right")
-                        .font(.system(size: 60))
-                        .foregroundColor(.blue)
-                        .padding(.top, 40)
+                    HStack {
+                        Image(systemName: "antenna.radiowaves.left.and.right")
+                            .font(.system(size: 60))
+                            .foregroundColor(.blue)
+                        
+                        Button(action: { showingScanner = true }) {
+                            VStack {
+                                Image(systemName: "qrcode.viewfinder")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.blue)
+                                Text("Skanuj")
+                                    .font(.caption)
+                            }
+                        }
+                        .padding(.leading, 20)
+                    }
+                    .padding(.top, 40)
                     
                     Text("Szukam komputerów...")
                         .font(.title2)
@@ -55,6 +69,25 @@ struct ConnectionAutoView: View {
         }
         .sheet(isPresented: $showingSettings) {
             SettingsView()
+        }
+        .sheet(isPresented: $showingScanner) {
+            QRScannerView { code in
+                // Format kodu: "1234|NazwaMaca"
+                let components = code.split(separator: "|")
+                if components.count >= 2 {
+                    let pin = String(components[0])
+                    let name = String(components[1])
+                    
+                    // Znajdź peera o tej nazwie
+                    if let peer = connectivityManager.availablePeers.first(where: { $0.displayName == name }) {
+                        print("Auto-connecting via QR to \(name)")
+                        connectivityManager.invitePeer(peer, code: pin)
+                    } else {
+                        // Jeśli nie znaleziono, można np. poczekać lub wyświetlić błąd
+                        print("Peer \(name) not found yet.")
+                    }
+                }
+            }
         }
         .alert("Wpisz kod PIN", isPresented: $showingPINAlert) {
             TextField("Kod z ekranu Maca", text: $pinCode)

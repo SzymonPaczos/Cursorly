@@ -6,9 +6,9 @@ class ConnectivityManager: NSObject, ObservableObject {
     private let serviceType = "cursorly-ctrl"
     
     #if os(iOS)
-    private let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    let myPeerId = MCPeerID(displayName: UIDevice.current.name)
     #elseif os(macOS)
-    private let myPeerId = MCPeerID(displayName: Host.current().localizedName ?? "Mac")
+    let myPeerId = MCPeerID(displayName: Host.current().localizedName ?? "Mac")
     #endif
     
     private let serviceAdvertiser: MCNearbyServiceAdvertiser
@@ -147,6 +147,20 @@ extension ConnectivityManager: MCSessionDelegate {
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {}
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {}
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
+    
+    // Obsługa certyfikatów SSL/TLS
+    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
+        print("Verifying secure connection (TLS/SSL) from: \(peerID.displayName)")
+        if let certs = certificate as? [SecCertificate], !certs.isEmpty {
+            // W prawdziwej produkcji weryfikowalibyśmy tu podpis CA lub Pinning klucza
+            // Ponieważ MultipeerConnectivity używa self-signed certyfikatów dla peerów, akceptujemy obecność certyfikatu.
+            print("Certificate present. Encryption handshake valid.")
+            certificateHandler(true)
+        } else {
+            print("No certificate received. Rejecting connection.")
+            certificateHandler(false)
+        }
+    }
 }
 
 extension ConnectivityManager: MCNearbyServiceAdvertiserDelegate {

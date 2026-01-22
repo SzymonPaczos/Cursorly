@@ -31,13 +31,30 @@ import ApplicationServices
                                 .foregroundColor(.secondary)
                                 .padding(.top, 10)
                             
-                            Text(connectivityManager.pairingCode)
-                                .font(.system(size: 48, design: .monospaced))
-                                .fontWeight(.bold)
-                                .foregroundColor(.primary)
-                                .padding(10)
-                                .background(Color.black.opacity(0.05))
-                                .cornerRadius(10)
+                            HStack(spacing: 20) {
+                                // Tekstowy PIN
+                                Text(connectivityManager.pairingCode)
+                                    .font(.system(size: 48, design: .monospaced))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.primary)
+                                    .padding(10)
+                                    .background(Color.black.opacity(0.05))
+                                    .cornerRadius(10)
+                                
+                                // QR Kod
+                                if let qr = QRCodeGenerator.generate(from: "\(connectivityManager.pairingCode)|\(connectivityManager.myPeerId.displayName)") {
+                                    qr
+                                        .resizable()
+                                        .interpolation(.none)
+                                        .scaledToFit()
+                                        .frame(width: 80, height: 80)
+                                        .padding(5)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                                        )
+                                }
+                            }
                         }
                     } else {
                         Text("Serwer zatrzymany")
