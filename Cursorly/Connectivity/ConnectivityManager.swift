@@ -138,8 +138,76 @@ extension ConnectivityManager: MCSessionDelegate {
             clickUp?.post(tap: .cghidEventTap)
             
         case .scroll:
-            // TODO: Scroll implementation
-            break
+            // Scroll 1 unit = 1 line (roughly). We need to scale.
+            // event.y is usually small delta. 
+            let sensitivity: Int32 = 5
+            let scrollY = Int32(event.y * CGFloat(sensitivity))
+            let scrollX = Int32(event.x * CGFloat(sensitivity))
+            
+            // Note: wheelCount: 2 (Y, X). In scrollWheelEvent, Y comes first.
+            if let scrollEvent = CGEvent(scrollWheelEvent2Source: source, units: .pixel, wheelCount: 2, wheel1: scrollY, wheel2: scrollX, wheel3: 0) {
+                 scrollEvent.post(tap: .cghidEventTap)
+            }
+
+        case .keyboard:
+            guard let text = event.additionalData else { return }
+            // Simulating text entry is complex safely.
+            // For MVP, we use AppleScript to support emoji and special chars easily.
+            let script = "tell application \"System Events\" to keystroke \"\(text)\""
+            if let scriptObject = NSAppleScript(source: script) {
+                var error: NSDictionary?
+                scriptObject.executeAndReturnError(&error)
+                if let error = error {
+                    print("Keyboard Error: \(error)")
+                }
+            }
+            
+        case .media:
+            guard let action = event.additionalData else { return }
+            // Map actions to system keys
+            // 0: Sound up, 1: Sound down, 2: Mute
+            // 16: Play, 19: Next, 20: Prev
+            var keyCode: Int32 = -1
+            
+            switch action {
+            case "playpause": keyCode = 16
+            case "next": keyCode = 19
+            case "prev": keyCode = 20
+            case "volup": keyCode = 0
+            case "voldown": keyCode = 1
+            case "mute": keyCode = 7
+            default: break
+            }
+            
+            if keyCode != -1 {
+                let systemKey = NXSystemDefined
+                // Simulation of Media Keys via IOKit/Quartz is tricky in pure CGEvent without specialized flags.
+                // Using AppleScript for Media keys is often more reliable for High Level control.
+                 let script = "tell application \"System Events\" to key code \(keyCode) using command down" // No command for media usually?
+                 // Actually media keys are special. Let's use specific script for Music/System
+                 // Better standard way:
+                 // let loc = CGEventTapLocation.cghidEventTap
+                 // let keyDown = CGEvent(keyboardEventSource: source, virtualKey: CGKeyCode(keyCode), keyDown: true)
+                 // keyDown?.flags = .maskCommand // ??
+                 // Media keys are hardware dependent.
+                 
+                 // Fallback to AppleScript for simplicity in MVP:
+                 var appleScriptCmd = ""
+                 switch action {
+                 case "playpause": appleScriptCmd = "key code 100" // F8/Play
+                 case "next": appleScriptCmd = "key code 101" // F9
+                 case "prev": appleScriptCmd = "key code 98" // F7
+                 case "volup": appleScriptCmd = "key code 111" // F12
+                 case "voldown": appleScriptCmd = "key code 103" // F11
+                 case "mute": appleScriptCmd = "key code 109" // F10
+                 default: break
+                 }
+                 
+                 if !appleScriptCmd.isEmpty {
+                     let script = "tell application \"System Events\" to \(appleScriptCmd)"
+                     NSAppleScript(source: script)?.executeAndReturnError(nil)
+                 }
+            }
         }
     }
     #endif
