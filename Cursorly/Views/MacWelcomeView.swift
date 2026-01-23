@@ -168,4 +168,5 @@ import ApplicationServices
 
 #Preview {
     MacWelcomeView()
+        .environmentObject(ConnectivityManager())
 } 

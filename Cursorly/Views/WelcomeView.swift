@@ -52,7 +52,9 @@ struct WelcomeView: View {
             
             Spacer()
         }
+        #if os(iOS)
         .navigationBarHidden(true)
+        #endif
     }
 }
 
@@ -80,7 +82,11 @@ struct ConnectionButton: View {
                 .foregroundColor(.secondary)
         }
         .padding()
-        .background(Color(.systemGray6))
+        #if os(iOS)
+        .background(Color(uiColor: .systemGray6))
+        #elseif os(macOS)
+        .background(Color.secondary.opacity(0.1))
+        #endif
         .cornerRadius(12)
     }
 }

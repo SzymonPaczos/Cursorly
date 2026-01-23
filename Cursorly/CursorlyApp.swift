@@ -5,23 +5,21 @@ struct CursorlyApp: App {
     @StateObject private var connectivityManager = ConnectivityManager()
     
     var body: some Scene {
+        #if os(iOS)
         WindowGroup {
-            #if os(iOS)
             NavigationStack {
                 WelcomeView()
             }
             .environmentObject(connectivityManager)
-            #elseif os(macOS)
+        }
+        #elseif os(macOS)
+        WindowGroup {
             MacWelcomeView()
                 .environmentObject(connectivityManager)
-            #endif
-        }
-            #endif
         }
         
-        #if os(macOS)
         MenuBarExtra {
-            Button("Status: \(connectivityManager.connectedPeers.isEmpty ? "Oczekiwanie..." : "Połączono: \(connectivityManager.connectedPeers.first?.displayName ?? "")")") {    
+            Button("Status: \(connectivityManager.connectedPeers.isEmpty ? "Oczekiwanie..." : "Połączono: \(connectivityManager.connectedPeers.first?.displayName ?? "")")") {
             }
             .disabled(true)
             
@@ -36,4 +34,4 @@ struct CursorlyApp: App {
         }
         #endif
     }
-} 
+}

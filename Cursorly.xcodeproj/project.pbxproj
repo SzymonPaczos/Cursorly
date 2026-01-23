@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CAE4E0DD48DC3A50C9454578 /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864EABCB050A8B6C414EE103 /* ConnectivityManager.swift */; };
+		21D69330F268F8CE7A5E50C4 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758BBBE60BC497746967070B /* MotionManager.swift */; };
+		6525D6064D237EF7A95B8191 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C3139680D1A09BD77A05AF /* QRCodeGenerator.swift */; };
+		2591BD086FA6BFB4DA7B2C52 /* CursorEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F417E59EB0137016B0DE76 /* CursorEvent.swift */; };
 		A1234567890123456789012A /* CursorlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012B /* CursorlyApp.swift */; };
 		A1234567890123456789012C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012D /* WelcomeView.swift */; };
 		A1234567890123456789012E /* ConnectionAutoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012F /* ConnectionAutoView.swift */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		864EABCB050A8B6C414EE103 /* ConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
+		758BBBE60BC497746967070B /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		F2C3139680D1A09BD77A05AF /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		E3F417E59EB0137016B0DE76 /* CursorEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorEvent.swift; sourceTree = "<group>"; };
 		A1234567890123456789014C /* Cursorly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cursorly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1234567890123456789012B /* CursorlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorlyApp.swift; sourceTree = "<group>"; };
 		A1234567890123456789012D /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -40,9 +48,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7ECONNECTIVITY01 /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				864EABCB050A8B6C414EE103 /* ConnectivityManager.swift */,
+			);
+			path = Connectivity;
+			sourceTree = "<group>";
+		};
+		7EMANAGERS00001 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				758BBBE60BC497746967070B /* MotionManager.swift */,
+				F2C3139680D1A09BD77A05AF /* QRCodeGenerator.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		7EMODELS0000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E3F417E59EB0137016B0DE76 /* CursorEvent.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A1234567890123456789014E /* Cursorly */ = {
 			isa = PBXGroup;
 			children = (
+				7ECONNECTIVITY01 /* Connectivity */,
+				7EMANAGERS00001 /* Managers */,
+				7EMODELS0000001 /* Models */,
 				A1234567890123456789012B /* CursorlyApp.swift */,
 				A1234567890123456789014F /* Views */,
 				A1234567890123456789013F /* Assets.xcassets */,
@@ -157,6 +193,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE4E0DD48DC3A50C9454578 /* ConnectivityManager.swift in Sources */,
+				21D69330F268F8CE7A5E50C4 /* MotionManager.swift in Sources */,
+				6525D6064D237EF7A95B8191 /* QRCodeGenerator.swift in Sources */,
+				2591BD086FA6BFB4DA7B2C52 /* CursorEvent.swift in Sources */,
 				A1234567890123456789012C /* WelcomeView.swift in Sources */,
 				A1234567890123456789012E /* ConnectionAutoView.swift in Sources */,
 				A1234567890123456789013A /* ConnectionManualView.swift in Sources */,

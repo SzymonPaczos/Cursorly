@@ -180,7 +180,6 @@ extension ConnectivityManager: MCSessionDelegate {
             }
             
             if keyCode != -1 {
-                let systemKey = NXSystemDefined
                 // Simulation of Media Keys via IOKit/Quartz is tricky in pure CGEvent without specialized flags.
                 // Using AppleScript for Media keys is often more reliable for High Level control.
                  let script = "tell application \"System Events\" to key code \(keyCode) using command down" // No command for media usually?

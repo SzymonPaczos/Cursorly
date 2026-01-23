@@ -30,7 +30,9 @@ struct ConnectionManualView: View {
         }
         .padding(.horizontal, 20)
         .navigationTitle("Ręczne połączenie")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.large)
+        #endif
     }
 }
 

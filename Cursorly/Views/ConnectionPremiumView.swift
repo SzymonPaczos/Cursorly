@@ -30,7 +30,9 @@ struct ConnectionPremiumView: View {
         }
         .padding(.horizontal, 20)
         .navigationTitle("Premium połączenie")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.large)
+        #endif
     }
 }
 

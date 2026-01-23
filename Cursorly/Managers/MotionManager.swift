@@ -1,7 +1,10 @@
 import Foundation
+#if os(iOS)
 import CoreMotion
+#endif
 import SwiftUI
 
+#if os(iOS)
 class MotionManager: ObservableObject {
     private let motionManager = CMMotionManager()
     private let queue = OperationQueue()
@@ -64,3 +67,16 @@ class MotionManager: ObservableObject {
         motionManager.stopDeviceMotionUpdates()
     }
 }
+#else
+// macOS placeholder - motion tracking not available
+class MotionManager: ObservableObject {
+    @Published var isActive: Bool = false
+    var onMove: ((CGFloat, CGFloat) -> Void)?
+    
+    func startUpdates() {
+        print("Motion tracking not available on macOS")
+    }
+    
+    func stopUpdates() {}
+}
+#endif
